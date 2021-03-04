@@ -1,0 +1,26 @@
+// esse arquivo é como sde fosse um contrato entre cliente e servidor
+
+syntax = "proto3";
+
+option go_package = "pb"; //pg: alias pacote utilizado no codigo gerado
+
+message HelloRequest {
+  string name = 1; // sera enviado um name
+}
+
+message HelloResponse {
+  string msg = 1; // tera como resposta uma mensage
+}
+
+//serviço grpc
+service HelloService{
+  //recebe um nome e retorna uma mensage
+  rpc Hello(HelloRequest) returns (HelloResponse) {}
+}
+
+// para gerar os codigos do protobuf usa-mos o protoc (compilador do protobuf)
+// deve ser baixar o arquivo e adicionar a sua variavel de ambiente
+// protoc.exe, protoc.gen.go.exe
+
+//comando para a geração dos aquivos
+// $  protoc --proto_path=proto proto/*.proto --go_out=plugins=grpc:pb
